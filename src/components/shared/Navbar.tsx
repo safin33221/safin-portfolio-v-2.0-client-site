@@ -26,6 +26,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
+import { ModeToggle } from "./MoodToggle"
 
 // Core navigation
 const navigationLinks = [
@@ -100,6 +101,7 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-2">
+          <ModeToggle />
           {!isAuthenticated ? (
             <>
               <Button asChild variant="ghost" size="sm">
