@@ -5,7 +5,7 @@ import myImg from "../../../../public/asset/aboutMeImg.jpg"
 import { motion } from "framer-motion"
 export default function AboutMe() {
     return (
-        <section id="about" className="w-full  text-white py-16 px-6 md:px-12 lg:px-20">
+        <section id="about" className="w-full  text-white ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
                 {/* Left: Image */}
