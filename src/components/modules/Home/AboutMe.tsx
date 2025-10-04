@@ -5,7 +5,7 @@ import myImg from "../../../../public/asset/aboutMeImg.jpg"
 import { motion } from "framer-motion"
 export default function AboutMe() {
     return (
-        <section id="about" className="w-full  text-white ">
+        <section id="about" className="w-full  text-white max-md:px-3 ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
                 {/* Left: Image */}
@@ -26,7 +26,7 @@ export default function AboutMe() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h2 className="text-4xl font-extrabold mb-6 text-purple-400">About Me</h2>
+                    <h2 className="bg-gradient-to-r from-purple-400 to-purple-600 text-transparent bg-clip-text text-4xl">About Me</h2>
 
                     {/* Personal Info */}
                     <div className="mb-6">
