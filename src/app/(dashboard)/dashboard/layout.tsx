@@ -4,7 +4,7 @@ import React from 'react';
 
 const dashboardLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className='max-w-[1920px] flex gap-3 items-center mx-auto'>
+        <div className='max-w-[1920px] flex gap-10  mx-auto'>
             <Sidebar />
             {children}
         </div>
