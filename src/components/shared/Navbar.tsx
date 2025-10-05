@@ -30,6 +30,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
+import { signOut, useSession } from "next-auth/react"
 
 // Core navigation
 const navigationLinks = [
@@ -50,8 +51,9 @@ const navigationLinks = [
 // Demo auth state
 const isAuthenticated = true
 const user = { name: "Safin", email: "safin@example.com" }
-
 export default function Navbar() {
+  const session = useSession()
+  console.log(session);
   return (
     <header className="border-b px-4 md:px-6 sticky top-0 bg backdrop-blur z-50">
       <div className="flex h-16 items-center justify-between gap-4">
@@ -109,7 +111,7 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-2">
-          {!isAuthenticated ? (
+          {session?.status !== "authenticated" ? (
             <>
               <Button asChild variant="ghost" size="sm">
                 <Link href="/login" className="flex items-center gap-1 text-sm">
@@ -131,7 +133,7 @@ export default function Navbar() {
                   className="flex items-center gap-2"
                 >
                   <UserIcon size={16} />
-                  <span>{user.name}</span>
+                  <span>{session?.data?.user?.email}</span>
                 </Button>
               </DropdownMenuTrigger>
 
@@ -155,12 +157,12 @@ export default function Navbar() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link
-                    href="/logout"
+                  <span
+                    onClick={() => signOut()}
                     className="flex items-center gap-2 text-red-600"
                   >
                     <LogOutIcon size={16} /> Logout
-                  </Link>
+                  </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

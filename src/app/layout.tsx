@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SUSE } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
+import AuthProvider from "@/provider/AuthProvider";
 
 const suse = SUSE({
   weight: '400',
@@ -28,8 +29,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <AuthProvider>
 
-          {children}
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

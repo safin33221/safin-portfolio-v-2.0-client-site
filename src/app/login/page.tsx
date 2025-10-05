@@ -18,6 +18,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
 
 const formSchema = z.object({
     email: z.string().min(2, {
@@ -44,24 +45,17 @@ export default function LoginPage() {
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setLoading(true)
+        console.log(data);
+
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
-
-            const result = await res.json();
-            console.log(result);
-
-            if (result.success) {
-                toast.success("successful")
-                router.push("/");
-            } else {
-                toast.error(result.message || "Invalid credentials");
-            }
-        } catch (error) {
-            toast.error("Something went wrong!");
+            signIn("credentials", {
+                ...data,
+                callbackUrl: "/"
+            })
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            console.log(error);
+            toast.error("Something went wrong!", error.message);
         } finally {
             setLoading(false);
         }
