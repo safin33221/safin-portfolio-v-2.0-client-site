@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Roboto, SUSE } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider"
+import { SUSE } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const suse = SUSE({
@@ -8,8 +8,8 @@ const suse = SUSE({
   subsets: ['latin'],
 })
 export const metadata: Metadata = {
-  title: "Safayet Hossan Safin",
-  description: "safayet hossan safin portfolio",
+  title: "Safayet Hossan Safin | Full Stack Developer ",
+  description: "Explore the portfolio of Safayet Hossan Safin, a passionate full stack developer specializing in modern web technologies, projects, and professional experience.",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${suse.className} `}
+        className={`${suse.className}  `}
       >
         <ThemeProvider
           attribute="class"

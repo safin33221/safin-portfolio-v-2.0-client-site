@@ -25,7 +25,7 @@ import Link from "next/link"
 // Core navigation
 const navigationLinks = [
   { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
+  { href: "#projects", label: "Projects" },
   { href: "/blogs", label: "Blogs" },
   {
     label: "About",
