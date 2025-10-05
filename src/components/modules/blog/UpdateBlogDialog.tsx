@@ -1,37 +1,34 @@
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
+    AlertDialog, AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
     AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
+    AlertDialogHeader, AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import LoginForm from "./LoginForm"
-import { LogInIcon } from "lucide-react"
+import UpdateBlogForm from "./UpdateBlogForm"
+import { IBlog } from "@/types/blog"
+import { Pencil } from "lucide-react"
+import { useState } from "react"
 
-export function LoginDialog() {
+export function UpdateBlogDialog(blog: IBlog) {
+    const [open, setOpen] = useState(false)
+
     return (
-        <AlertDialog >
+        <AlertDialog open={open} onOpenChange={setOpen}  >
             <AlertDialogTrigger asChild>
                 <Button variant="outline">
-                    <LogInIcon size={14} /> Login
+                    <Pencil size={16} /> Edit
                 </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-card border max-w-4xl ">
-
+            <AlertDialogContent className="bg-none">
                 <AlertDialogHeader>
-                    {/* <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle> */}
                     <AlertDialogDescription>
-                        <LoginForm />
+                        <UpdateBlogForm initialData={blog} onSuccess={() => setOpen(false)} />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    {/* <AlertDialogAction>Continue</AlertDialogAction> */}
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

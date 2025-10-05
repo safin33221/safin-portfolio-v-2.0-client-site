@@ -4,6 +4,7 @@ import { IBlog } from "@/types/blog";
 export default async function AllBlog() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`)
     const blogs = await res.json()
+    console.log(blogs);
 
     return (
         <div>
