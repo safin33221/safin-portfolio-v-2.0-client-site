@@ -3,6 +3,8 @@ import { SUSE } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import AuthProvider from "@/provider/AuthProvider";
+import { Toaster } from "sonner";
+
 
 const suse = SUSE({
   weight: '400',
@@ -29,6 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster/>
           <AuthProvider>
 
             {children}

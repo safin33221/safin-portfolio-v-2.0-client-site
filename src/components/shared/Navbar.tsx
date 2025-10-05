@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
 import { signOut, useSession } from "next-auth/react"
+import { LoginDialog } from "../modules/auth/LoginDialog"
 
 // Core navigation
 const navigationLinks = [
@@ -49,8 +50,7 @@ const navigationLinks = [
 ]
 
 // Demo auth state
-const isAuthenticated = true
-const user = { name: "Safin", email: "safin@example.com" }
+
 export default function Navbar() {
   const session = useSession()
   console.log(session);
@@ -113,11 +113,10 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           {session?.status !== "authenticated" ? (
             <>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/login" className="flex items-center gap-1 text-sm">
-                  <LogInIcon size={14} /> Login
-                </Link>
-              </Button>
+             
+
+              <LoginDialog />
+
 
             </>
           ) : (
@@ -134,7 +133,7 @@ export default function Navbar() {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
+                <DropdownMenuLabel>{session?.data?.user?.email}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/dashboard" className="flex items-center gap-2">
