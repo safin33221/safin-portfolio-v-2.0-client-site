@@ -118,11 +118,7 @@ export default function Navbar() {
                   <LogInIcon size={14} /> Login
                 </Link>
               </Button>
-              <Button asChild size="sm">
-                <Link href="/signup" className="text-sm">
-                  Get Started
-                </Link>
-              </Button>
+
             </>
           ) : (
             <DropdownMenu>
