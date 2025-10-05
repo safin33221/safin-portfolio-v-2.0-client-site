@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Home, PlusCircle, LogOut, LayoutDashboard } from "lucide-react";
+import { Home, PlusCircle, LogOut, LayoutDashboard, List } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -15,6 +15,7 @@ export default function Sidebar() {
         { href: "/", label: "Home", icon: Home },
         { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
         { href: "/dashboard/create-blog", label: "Create Blog", icon: PlusCircle },
+        { href: "/dashboard/all-blog", label: "All Blog", icon: List },
     ];
 
     return (

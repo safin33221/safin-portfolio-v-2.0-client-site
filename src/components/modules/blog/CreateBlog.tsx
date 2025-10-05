@@ -48,7 +48,7 @@ export default function CreateBlogForm() {
         tags: data.tags.split(",").map((t) => t.trim()),
       }
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blogs`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
