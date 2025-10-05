@@ -1,9 +1,11 @@
 import { IBlog } from "@/types/blog";
+import Link from "next/link";
 import Image from "next/image";
 
 
 const BlogCard = (blog: IBlog) => {
     return (
+
         <div className="bg-zinc-900 text-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition p-4 flex flex-col">
             {blog.thumbnail && (
                 <div className="relative w-full h-48 mb-3 rounded-xl overflow-hidden">
@@ -12,7 +14,7 @@ const BlogCard = (blog: IBlog) => {
                         alt={blog.title}
                         width={300}
                         height={300}
-                        
+
                         className="object-cover hover:scale-105 transition"
                     />
                 </div>
@@ -35,11 +37,16 @@ const BlogCard = (blog: IBlog) => {
                         </span>
                     ))}
                 </div>
+
                 {blog.views !== undefined && (
                     <span className="text-xs text-gray-400">{blog.views} views</span>
                 )}
             </div>
+            <Link href={`/blogs/${blog.id}`} passHref className="mt-4 inline-block self-end">
+                <span className="text-lg text-purple-400 underline cursor-pointer">Read more</span>
+            </Link>
         </div>
+
     );
 };
 
