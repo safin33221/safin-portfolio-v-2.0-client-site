@@ -5,24 +5,33 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { Pencil, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import { useState } from "react"
 import { UpdateBlogDialog } from "./UpdateBlogDialog"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 const DashboardBlogCard = (blog: IBlog) => {
-  const router = useRouter()
+
   const [deleting, setDeleting] = useState(false)
 
   const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this blog?")) return
     setDeleting(true)
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blogs/${blog.id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${blog.id}`, {
         method: "DELETE",
       })
-      if (!res.ok) throw new Error("Failed to delete blog")
+      if (!res.ok) return toast.error("Failed to delete blog")
       toast.success("Blog deleted successfully")
-      router.refresh()
     } catch {
       toast.error("Failed to delete blog")
     } finally {
@@ -68,20 +77,37 @@ const DashboardBlogCard = (blog: IBlog) => {
         </div>
 
         <div className="mt-4 flex justify-between items-center">
-          <div
-            className="flex items-center gap-1 text-purple-400 hover:text-purple-300 transition text-sm font-medium"
-          >
           <UpdateBlogDialog {...blog} />
-          </div>
 
-          <button
-            onClick={handleDelete}
-            disabled={deleting}
-            className="flex items-center gap-1 text-red-400 hover:text-red-300 transition text-sm font-medium"
-          >
-            <Trash2 size={16} />
-            {deleting ? "Deleting..." : "Delete"}
-          </button>
+          {/* 🔥 Replace old confirm() with shadcn AlertDialog */}
+          <AlertDialog >
+            <AlertDialogTrigger asChild>
+              <button
+                disabled={deleting}
+                className="flex items-center gap-1 text-red-400 hover:text-red-300 transition text-sm font-medium"
+              >
+                <Trash2 size={16} />
+                {deleting ? "Deleting..." : "Delete"}
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="bg-zinc-950 border border-zinc-800 max-w-2xl">
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete your blog post.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={handleDelete}
+                  className="bg-red-600 hover:bg-red-700 text-white"
+                >
+                  Confirm Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
 
         <Link
