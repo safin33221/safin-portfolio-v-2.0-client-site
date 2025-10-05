@@ -1,6 +1,15 @@
 "use client"
 
-import { BookOpenIcon, InfoIcon, LifeBuoyIcon, LogInIcon, LogOutIcon, UserIcon, PlusCircleIcon, FolderOpenIcon } from "lucide-react"
+import {
+  BookOpenIcon,
+  InfoIcon,
+  LifeBuoyIcon,
+  LogInIcon,
+  LogOutIcon,
+  UserIcon,
+  PlusCircleIcon,
+  FolderOpenIcon,
+} from "lucide-react"
 import Logo from "@/components/logo"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -25,12 +34,11 @@ import Link from "next/link"
 // Core navigation
 const navigationLinks = [
   { href: "/", label: "Home" },
-  { href: "#projects", label: "Projects" },
+  { href: "/#projects", label: "Projects" },
   { href: "/blogs", label: "Blogs" },
   {
     label: "About",
     submenu: true,
-    type: "icon",
     items: [
       { href: "/about", label: "About Me", icon: "InfoIcon" },
       { href: "/tutorials", label: "Tutorials", icon: "BookOpenIcon" },
@@ -39,7 +47,7 @@ const navigationLinks = [
   },
 ]
 
-// Fake auth state for demo. Replace with real auth logic.
+// Demo auth state
 const isAuthenticated = true
 const user = { name: "Safin", email: "safin@example.com" }
 
@@ -52,24 +60,26 @@ export default function Navbar() {
           <Link href="/" className="text-primary hover:text-primary/90">
             <Logo />
           </Link>
-          <NavigationMenu viewport={false} className="max-md:hidden">
+
+          {/* Navigation Menu */}
+          <NavigationMenu className="max-md:hidden">
             <NavigationMenuList className="gap-2">
               {navigationLinks.map((link, index) => (
                 <NavigationMenuItem key={index}>
                   {link.submenu ? (
                     <>
-                      <NavigationMenuTrigger className="text-xl hover:bg-primary/30 hover:border hover:text-primary-foreground  bg-transparent px-2 py-1.5 font-medium">
+                      <NavigationMenuTrigger className="text-xl hover:bg-primary/30 hover:border hover:text-primary-foreground bg-transparent px-2 py-1.5 font-medium">
                         {link.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="z-50 p-1">
                         <ul className={cn("min-w-48")}>
                           {link.items.map((item, idx) => (
                             <li key={idx}>
-                              <NavigationMenuLink
-
-                                className="py-1.5 flex items-center gap-2"
-                              >
-                                <Link href={item.href}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  href={item.href}
+                                  className="py-1.5 flex items-center gap-2 hover:bg-primary/20 rounded-md px-2"
+                                >
                                   {item.icon === "InfoIcon" && <InfoIcon size={16} />}
                                   {item.icon === "BookOpenIcon" && <BookOpenIcon size={16} />}
                                   {item.icon === "LifeBuoyIcon" && <LifeBuoyIcon size={16} />}
@@ -82,11 +92,11 @@ export default function Navbar() {
                       </NavigationMenuContent>
                     </>
                   ) : (
-                    <NavigationMenuLink
-
-                      className="text-xl hover:border hover:bg-primary/20 hover:text-primary-foreground py-1.5 font-medium"
-                    >
-                      <Link href={link.href as string} >
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={link.href as string}
+                        className="text-xl hover:border hover:bg-primary/20 hover:text-primary-foreground py-1.5 font-medium px-2 rounded-md"
+                      >
                         {link.label}
                       </Link>
                     </NavigationMenuLink>
@@ -99,49 +109,58 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-2">
-          {/* <ModeToggle /> */}
           {!isAuthenticated ? (
             <>
               <Button asChild variant="ghost" size="sm">
-                <a href="/login" className="flex items-center gap-1 text-sm">
+                <Link href="/login" className="flex items-center gap-1 text-sm">
                   <LogInIcon size={14} /> Login
-                </a>
+                </Link>
               </Button>
               <Button asChild size="sm">
-                <a href="/signup" className="text-sm">Get Started</a>
+                <Link href="/signup" className="text-sm">
+                  Get Started
+                </Link>
               </Button>
             </>
           ) : (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center gap-2"
+                >
                   <UserIcon size={16} />
                   <span>{user.name}</span>
                 </Button>
               </DropdownMenuTrigger>
+
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <a href="/dashboard" className="flex items-center gap-2">
+                  <Link href="/dashboard" className="flex items-center gap-2">
                     <FolderOpenIcon size={16} /> Dashboard
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/projects/new" className="flex items-center gap-2">
+                  <Link href="/projects/new" className="flex items-center gap-2">
                     <PlusCircleIcon size={16} /> New Project
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/blogs/new" className="flex items-center gap-2">
+                  <Link href="/blogs/new" className="flex items-center gap-2">
                     <PlusCircleIcon size={16} /> New Blog
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-600" asChild>
-                  <a href="/logout" className="flex items-center gap-2">
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/logout"
+                    className="flex items-center gap-2 text-red-600"
+                  >
                     <LogOutIcon size={16} /> Logout
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
