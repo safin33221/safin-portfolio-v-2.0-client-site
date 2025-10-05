@@ -3,12 +3,10 @@
 import {
   BookOpenIcon,
   InfoIcon,
-  LifeBuoyIcon,
-  LogInIcon,
-  LogOutIcon,
+  LifeBuoyIcon, LogOutIcon,
   UserIcon,
   PlusCircleIcon,
-  FolderOpenIcon,
+  FolderOpenIcon
 } from "lucide-react"
 import Logo from "@/components/logo"
 import { cn } from "@/lib/utils"

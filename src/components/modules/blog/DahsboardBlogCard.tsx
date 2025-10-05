@@ -3,7 +3,6 @@
 import { IBlog } from "@/types/blog"
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { Trash2 } from "lucide-react"
 import { useState } from "react"

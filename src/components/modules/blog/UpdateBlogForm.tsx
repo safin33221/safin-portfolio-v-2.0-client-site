@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { useState } from "react"
@@ -62,7 +63,8 @@ export default function UpdateBlogForm({ initialData, onSuccess, }: { initialDat
 
             toast.success("Blog updated successfully 🎉")
             onSuccess?.()
-        } catch (error) {
+        } catch (error: any) {
+            console.log(error);
             toast.error("Something went wrong while updating the blog")
         } finally {
             setLoading(false)
