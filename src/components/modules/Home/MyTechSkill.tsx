@@ -53,7 +53,7 @@ const MyTechSkill = () => {
         skills.map((skill, idx) => (
             <div
                 key={idx}
-                className="flex flex-col min-w-28 items-center justify-center p-4 bg-gray-900/50 rounded-xl border border-gray-700 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition cursor-grab"
+                className="flex flex-col min-w-28 items-center justify-center p-4 bg-gray-900/50 rounded-xl border border-gray-700 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition "
             >
                 <Image src={skill.icon} width={80} height={60} alt={skill.name} className="w-12 h-12 object-contain" />
                 <p className="text-sm mt-2 text-gray-300">{skill.name}</p>

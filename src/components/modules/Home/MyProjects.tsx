@@ -331,7 +331,7 @@ const MyProjects = () => {
                             </div>
 
                             {/* Glow Effect */}
-                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-400/5  opacity-0 group-hover:opacity-100 transition duration-700"></div>
                         </div>
                     ))}
                 </div>

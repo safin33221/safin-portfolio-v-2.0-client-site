@@ -21,7 +21,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import { ModeToggle } from "./MoodToggle"
 
 // Core navigation
 const navigationLinks = [
@@ -59,7 +58,7 @@ export default function Navbar() {
                 <NavigationMenuItem key={index}>
                   {link.submenu ? (
                     <>
-                      <NavigationMenuTrigger className="text-muted-foreground hover:text-primary bg-transparent px-2 py-1.5 font-medium">
+                      <NavigationMenuTrigger className="text-xl hover:bg-primary/30 hover:border hover:text-primary-foreground  bg-transparent px-2 py-1.5 font-medium">
                         {link.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="z-50 p-1">
@@ -67,13 +66,15 @@ export default function Navbar() {
                           {link.items.map((item, idx) => (
                             <li key={idx}>
                               <NavigationMenuLink
-                                href={item.href}
+
                                 className="py-1.5 flex items-center gap-2"
                               >
-                                {item.icon === "InfoIcon" && <InfoIcon size={16} />}
-                                {item.icon === "BookOpenIcon" && <BookOpenIcon size={16} />}
-                                {item.icon === "LifeBuoyIcon" && <LifeBuoyIcon size={16} />}
-                                {item.label}
+                                <Link href={item.href}>
+                                  {item.icon === "InfoIcon" && <InfoIcon size={16} />}
+                                  {item.icon === "BookOpenIcon" && <BookOpenIcon size={16} />}
+                                  {item.icon === "LifeBuoyIcon" && <LifeBuoyIcon size={16} />}
+                                  {item.label}
+                                </Link>
                               </NavigationMenuLink>
                             </li>
                           ))}
@@ -82,10 +83,12 @@ export default function Navbar() {
                     </>
                   ) : (
                     <NavigationMenuLink
-                      href={link.href}
-                      className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+
+                      className="text-xl hover:border hover:bg-primary/20 hover:text-primary-foreground py-1.5 font-medium"
                     >
-                      {link.label}
+                      <Link href={link.href as string} >
+                        {link.label}
+                      </Link>
                     </NavigationMenuLink>
                   )}
                 </NavigationMenuItem>
@@ -96,7 +99,7 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-2">
-          <ModeToggle />
+          {/* <ModeToggle /> */}
           {!isAuthenticated ? (
             <>
               <Button asChild variant="ghost" size="sm">
