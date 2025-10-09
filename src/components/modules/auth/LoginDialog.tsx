@@ -17,7 +17,7 @@ export function LoginDialog() {
                     <LogInIcon size={14} /> Login
                 </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-card border max-w-4xl ">
+            <AlertDialogContent className="bg-card border xl:max-w-xl ">
 
                 <AlertDialogHeader>
                     {/* <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle> */}

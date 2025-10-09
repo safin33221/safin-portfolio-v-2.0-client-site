@@ -59,7 +59,7 @@ export default function LoginForm() {
         }
     };
     return (
-        <div className=" w-full  shadow-lg  ">
+        <div className="   shadow-lg  ">
             <h1 className="text-3xl text-center font-bold bg-gradient-to-r from-purple-300 to-purple-600 text-transparent bg-clip-text">
                 Admin Login
             </h1>

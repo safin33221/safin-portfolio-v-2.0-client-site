@@ -66,7 +66,7 @@ export default function Page() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.15 }}
           >
-            <Card className="relative overflow-hidden border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-all duration-300 group">
+            <Card className="relative overflow-hidden border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-all duration-300 group max-w-xl w-full p-20">
               <div
                 className={`absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-br ${card.gradient} transition-all duration-300`}
               />

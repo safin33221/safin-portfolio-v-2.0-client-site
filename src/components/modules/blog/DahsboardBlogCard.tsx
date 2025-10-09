@@ -89,11 +89,12 @@ const DashboardBlogCard = (blog: IBlog) => {
                 {deleting ? "Deleting..." : "Delete"}
               </button>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-zinc-950 border border-zinc-800 max-w-2xl">
+            <AlertDialogContent className="bg-zinc-950 border border-zinc-800 xl:max-w-xl">
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete your blog post.
+                <AlertDialogDescription className="text-lg text-red-400">
+                  <span className="text-2xl font-bold text-purple-400 py-4">Title: {blog.title}</span> <br />
+                  Note: This action cannot be undone. This will permanently delete your blog post.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
