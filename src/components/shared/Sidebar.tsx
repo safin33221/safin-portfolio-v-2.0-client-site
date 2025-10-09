@@ -9,6 +9,8 @@ import {
   LayoutDashboard,
   List,
   Menu,
+  Upload,
+  UploadIcon,
 } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { signOut, useSession } from "next-auth/react"
@@ -24,11 +26,12 @@ export default function Sidebar() {
     { href: "/", label: "Home", icon: Home },
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/dashboard/create-blog", label: "Create Blog", icon: PlusCircle },
+    { href: "/dashboard/upload-project", label: "Upload Project", icon: UploadIcon },
     { href: "/dashboard/all-blog", label: "All Blog", icon: List },
   ]
 
   const SidebarContent = (
-    <div className="flex h-full flex-col bg-[#1a0029]/40 text-white">
+    <div className="flex fixed top-0   h-full flex-col bg-[#1a0029]/40 text-white">
       {/* Top Brand Section */}
       <div className="p-6 text-center border-b border-purple-700">
         <h1 className="text-2xl font-bold text-purple-400">Safin&apos;s Admin</h1>

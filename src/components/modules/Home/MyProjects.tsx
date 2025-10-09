@@ -1,6 +1,5 @@
 
 import Image from "next/image"
-import React from "react"
 
 import globalThought from "../../../../public/asset/project/globalThought.png"
 import tastyride from "../../../../public/asset/project/tastyride.png"

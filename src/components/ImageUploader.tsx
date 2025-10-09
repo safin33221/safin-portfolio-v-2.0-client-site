@@ -6,7 +6,7 @@ import { useFileUpload } from "@/hooks/use-file-upload"
 import { useEffect } from "react"
 
 export default function ImageUploader({ onChange }: { onChange?: (fileUrl: File | null) => void }) {
-  const maxSizeMB = 5
+  const maxSizeMB = 10
   const maxSize = maxSizeMB * 1024 * 1024 // 5MB default
 
   const [

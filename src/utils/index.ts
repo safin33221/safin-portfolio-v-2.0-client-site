@@ -1,6 +1,6 @@
 
-export const handleImageUpload = async (file: File) => {
-    // console.log(file);
+export const handleImageUpload = async (file:File) => {
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "Global_Thought"); // set in Cloudinary dashboard
