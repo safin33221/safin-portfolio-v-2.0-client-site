@@ -52,7 +52,7 @@ export default function UpdateBlogForm({ initialData, onSuccess, }: { initialDat
             }
 
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${initialData.id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project/${initialData.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),

@@ -1,8 +1,11 @@
 "use client";
 import Image from "next/image";
 import { toast } from "sonner";
+import { UpdateProjectDialog } from "./UpdateProjectDialog";
+import { IProject } from "@/types/project";
 
-export default function DashboardProjectCard({ project }: { project: any }) {
+
+export default function DashboardProjectCard({ project }: { project: IProject }) {
 
     const handleDelete = async () => {
 
@@ -75,7 +78,8 @@ export default function DashboardProjectCard({ project }: { project: any }) {
                             💻 Source Code
                         </a>
                         <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-sm font-semibold transition duration-300">
-                            ✏️ Update
+                            {/* ✏️ Update */}
+                            <UpdateProjectDialog project={project} />
                         </button>
                         <button
                             onClick={handleDelete}

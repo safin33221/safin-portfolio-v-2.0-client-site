@@ -8,7 +8,7 @@ export default async function DashboardProjects() {
     const projects = data?.data || [];
 
     return (
-        <div className="px-4 md:px-12 lg:px-20 py-16 bg-gradient-to-b from-[#0a0a0a] to-[#111111] min-h-screen text-white">
+        <div className="px-4 md:px-12 lg:px-20 py-16 min-h-screen text-white">
             <div className="flex items-center justify-between mb-12">
                 <h2 className="text-4xl font-extrabold bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 text-transparent bg-clip-text">
                     Manage Projects
