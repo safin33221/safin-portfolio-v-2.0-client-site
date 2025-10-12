@@ -28,10 +28,11 @@ export default function Sidebar() {
     { href: "/dashboard/create-blog", label: "Create Blog", icon: PlusCircle },
     { href: "/dashboard/upload-project", label: "Upload Project", icon: UploadIcon },
     { href: "/dashboard/all-blog", label: "All Blog", icon: List },
+    { href: "/dashboard/all-project", label: "All Project", icon: List },
   ]
 
   const SidebarContent = (
-    <div className="flex fixed top-0   h-full flex-col bg-[#1a0029]/40 text-white">
+    <div className="flex    h-full flex-col bg-[#1a0029]/40 text-white">
       {/* Top Brand Section */}
       <div className="p-6 text-center border-b border-purple-700">
         <h1 className="text-2xl font-bold text-purple-400">Safin&apos;s Admin</h1>
