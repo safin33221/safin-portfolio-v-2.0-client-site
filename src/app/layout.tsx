@@ -11,7 +11,7 @@ const suse = SUSE({
   subsets: ['latin'],
 })
 export const metadata: Metadata = {
-  title: "Safayet Hossan Safin | Full Stack Developer ",
+  title: "Safayet Hossan Safin |  Full Stack Developer ",
   description: "Explore the portfolio of Safayet Hossan Safin, a passionate full stack developer specializing in modern web technologies, projects, and professional experience.",
 };
 
@@ -31,7 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toaster/>
+          <Toaster />
           <AuthProvider>
 
             {children}

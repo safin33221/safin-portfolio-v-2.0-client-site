@@ -35,7 +35,6 @@ const formSchema = z.object({
 export default function UploadProjectForm() {
     const [image, setImage] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
-    console.log(image);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -51,7 +50,46 @@ export default function UploadProjectForm() {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
-       console.log(data);
+        setLoading(true);
+        try {
+            let imageUrl = "";
+            if (image) {
+                const Url = await handleImageUpload(image.file);
+                imageUrl = Url;
+            }
+            console.log(imageUrl);
+
+            const payload = {
+                name: data.name,
+                description: data.description,
+                tags: data.tags.split(",").map((t) => t.trim()),
+                challenges_faced: data.challenges_faced.split("\n").map((c) => c.trim()).filter(Boolean),
+                potential_improvements: data.potential_improvements.split("\n").map((p) => p.trim()).filter(Boolean),
+                image: imageUrl,
+                source_code_link: data.source_code_link,
+                live_page_link: data.live_page_link,
+            };
+
+
+            console.log("Final Payload:", payload);
+
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+
+            if (!res.ok) throw new Error("Failed to upload project");
+
+            toast.success("✅ Project uploaded successfully!");
+            form.reset();
+            setImage(null);
+        } catch (error) {
+            console.error("Error uploading project:", error);
+            toast.error("❌ Error while uploading project");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -66,14 +104,15 @@ export default function UploadProjectForm() {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="text-gray-100 text-lg grid grid-cols-1 lg:grid-cols-2 gap-8"
                     >
-
+                        {/* LEFT SIDE - Image */}
                         <div className="w-full bg-blue-500/10 border border-gray-700 hover:border-blue-400 duration-300 rounded-xl p-6 flex flex-col items-center justify-center">
                             <h2 className="text-2xl font-semibold mb-4 text-blue-400">
                                 Upload Project Thumbnail
                             </h2>
                             <ImageUploader onChange={(file) => setImage(file)} />
                         </div>
-                        {/* LEFT SIDE — FORM FIELDS */}
+
+                        {/* RIGHT SIDE - Form Fields */}
                         <div className="space-y-8">
                             <FormField
                                 control={form.control}
@@ -189,6 +228,7 @@ export default function UploadProjectForm() {
                                         </FormItem>
                                     )}
                                 />
+
                                 <FormField
                                     control={form.control}
                                     name="live_page_link"
@@ -206,8 +246,6 @@ export default function UploadProjectForm() {
                                         </FormItem>
                                     )}
                                 />
-                                {/* RIGHT SIDE — IMAGE UPLOADER */}
-
                             </div>
 
                             <Button
@@ -225,8 +263,6 @@ export default function UploadProjectForm() {
                                 )}
                             </Button>
                         </div>
-
-
                     </form>
                 </Form>
             </div>

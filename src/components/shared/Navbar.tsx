@@ -63,16 +63,16 @@ export default function Navbar() {
 
           {/* Navigation Menu */}
           <NavigationMenu className="max-md:hidden">
-            <NavigationMenuList className="gap-2">
+            <NavigationMenuList className="gap-4">
               {navigationLinks.map((link, index) => (
                 <NavigationMenuItem key={index}>
                   {link.submenu ? (
                     <>
-                      <NavigationMenuTrigger className="text-xl hover:bg-primary/30 hover:border hover:text-primary-foreground bg-transparent px-2 py-1.5 font-medium">
+                      <NavigationMenuTrigger className="text-xl hover:bg-primary/30  hover:text-primary-foreground bg-transparent px-2 py-1.5 font-medium ">
                         {link.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="z-50 p-1">
-                        <ul className={cn("min-w-48")}>
+                        <ul className={cn("min-w-48 ")}>
                           {link.items.map((item, idx) => (
                             <li key={idx}>
                               <NavigationMenuLink asChild>
@@ -95,7 +95,7 @@ export default function Navbar() {
                     <NavigationMenuLink asChild>
                       <Link
                         href={link.href as string}
-                        className="text-xl hover:border hover:bg-primary/20 hover:text-primary-foreground py-1.5 font-medium px-2 rounded-md"
+                        className="text-xl hover:border hover:bg-primary/20 hover:text-primary-foreground py-1.5 font-medium px-2  rounded-md"
                       >
                         {link.label}
                       </Link>
@@ -111,7 +111,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           {session?.status !== "authenticated" ? (
             <>
-             
+
 
               <LoginDialog />
 
