@@ -1,9 +1,12 @@
 import DashboardBlogCard from "@/components/modules/blog/DahsboardBlogCard";
 import { IBlog } from "@/types/blog";
+import next from "next";
 import { toast } from "sonner";
 
 export default async function AllBlog() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`,
+        { next: { revalidate: 60 } }
+    )
     const blogs = await res.json()
     return (
         <div>

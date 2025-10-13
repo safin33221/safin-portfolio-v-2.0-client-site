@@ -1,8 +1,19 @@
+import { IBlog } from "@/types/blog";
 import Image from "next/image";
 
+
+export async function generateStaticParams() {
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`);
+    const { data: blogs } = await res.json()
+    return blogs.map((blog: IBlog) => ({
+        slug: String(blog.id)
+    }))
+}
+
 export default async function BlogDetails({ params }: { params: { slug: string } }) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${params.slug}`, {
-        cache: "no-store", // ensures fresh data
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API} / blog / ${params.slug}`, {
+        next: { revalidate: 60 }
     });
     const data = await res.json();
     const blog = data?.data;

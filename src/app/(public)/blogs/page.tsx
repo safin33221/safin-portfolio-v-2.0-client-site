@@ -4,7 +4,9 @@ import BlogCard from "@/components/modules/blog/blogCard";
 import { IBlog } from "@/types/blog";
 
 export default async function Blog() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
+        next: { revalidate: 60 } //use isr
+    })
     const blogs = await res.json()
 
     return (
