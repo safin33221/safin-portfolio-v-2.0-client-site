@@ -1,14 +1,16 @@
 
-export const handleImageUpload = async (file:File) => {
-
+export const handleImageUpload = async (file: File) => {
+    console.log(file);
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "Global_Thought"); // set in Cloudinary dashboard
+    formData.append("upload_preset", "Global_Thought");
+
 
     const res = await fetch("https://api.cloudinary.com/v1_1/dsdisn5xi/image/upload", {
         method: "POST",
         body: formData,
     });
+    console.log(res);
     const data = await res.json();
     return data.secure_url; // This is the hosted image URL
 };

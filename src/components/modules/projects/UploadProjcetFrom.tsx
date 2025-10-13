@@ -56,7 +56,9 @@ export default function UploadProjectForm() {
         try {
             let imageUrl = "";
             if (image) {
-                const Url = await handleImageUpload(image.file);
+
+                const Url = await handleImageUpload(image as File);
+
                 imageUrl = Url;
             }
             console.log(imageUrl);

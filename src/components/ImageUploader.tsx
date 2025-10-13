@@ -26,12 +26,13 @@ export default function ImageUploader({ onChange }: { onChange?: (fileUrl: File 
   })
 
   const previewUrl = files[0]?.preview || null
-  // console.log(files);
+
   useEffect(() => {
     if (onChange) {
-      onChange(files[0] || null)
+      onChange(files[0]?.file as File || null)
     }
-  }, [files, onChange]);
+  }, [files, onChange])
+
 
   return (
     <div className="flex flex-col gap-2">
