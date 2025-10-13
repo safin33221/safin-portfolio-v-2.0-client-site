@@ -19,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import ImageUploader from "@/components/ImageUploader";
 import { handleImageUpload } from "@/utils";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     name: z.string().min(3, "Project name must be at least 3 characters"),
@@ -35,6 +36,7 @@ const formSchema = z.object({
 export default function UploadProjectForm() {
     const [image, setImage] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -84,11 +86,13 @@ export default function UploadProjectForm() {
             toast.success("✅ Project uploaded successfully!");
             form.reset();
             setImage(null);
+            router.push("/dashboard/all-project")
         } catch (error) {
             console.error("Error uploading project:", error);
             toast.error("❌ Error while uploading project");
         } finally {
             setLoading(false);
+
         }
     };
 

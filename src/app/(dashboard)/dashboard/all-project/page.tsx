@@ -1,8 +1,9 @@
 import DashboardProjectCard from "@/components/modules/projects/DashboardProjectCard";
+import { IProject } from "@/types/project";
 
 export default async function DashboardProjects() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
-        cache: "no-store",
+        next: { revalidate: 60 }
     });
     const data = await res.json();
     const projects = data?.data || [];
@@ -19,7 +20,7 @@ export default async function DashboardProjects() {
             </div>
 
             <div className="grid md:grid-cols-1 gap-10">
-                {projects.map((project: any) => (
+                {projects.map((project: IProject) => (
                     <DashboardProjectCard key={project.id} project={project} />
                 ))}
             </div>
