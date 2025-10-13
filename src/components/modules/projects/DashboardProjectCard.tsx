@@ -3,10 +3,22 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { UpdateProjectDialog } from "./UpdateProjectDialog";
 import { IProject } from "@/types/project";
-
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { useState } from "react";
+import { Trash2 } from "lucide-react";
 
 export default function DashboardProjectCard({ project }: { project: IProject }) {
-
+    const [deleting, setDeleting] = useState(false)
     const handleDelete = async () => {
 
         try {
@@ -81,17 +93,43 @@ export default function DashboardProjectCard({ project }: { project: IProject })
                             {/* ✏️ Update */}
                             <UpdateProjectDialog project={project} />
                         </button>
-                        <button
-                            onClick={handleDelete}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-sm font-semibold transition duration-300">
-                            🗑 Delete
-                        </button>
+
+                        <AlertDialog >
+                            <AlertDialogTrigger asChild>
+                                <button
+                                    disabled={deleting}
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-sm font-semibold transition duration-300"
+                                >
+                                    <Trash2 size={16} />
+                                    {deleting ? "Deleting..." : "Delete"}
+                                </button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent className="bg-zinc-950 border border-zinc-800 xl:max-w-xl">
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                    <AlertDialogDescription className="text-lg text-red-400">
+                                        <span className="text-2xl font-bold text-purple-400 py-4">Project Name : {project.name}</span> <br />
+                                        Note: This action cannot be undone. This will permanently delete your blog post.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction
+                                        onClick={handleDelete}
+                                        className="bg-red-600 hover:bg-red-700 text-white"
+                                    >
+                                        Confirm Delete
+                                    </AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
+
                     </div>
                 </div>
 
                 {/* Glow Overlay */}
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-purple-600/10 via-pink-500/5 to-blue-500/10 opacity-0 group-hover:opacity-100 transition duration-700" />
             </div>
-        </div>
+        </div >
     );
 };
