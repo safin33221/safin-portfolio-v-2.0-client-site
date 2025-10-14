@@ -10,7 +10,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             {/* Main Content */}
-            <main className="flex-1 overflow-y-auto bg-[#0f001a]/80 text-white">
+            <main className="flex-1 overflow-y-auto ">
                 {children}
             </main>
         </div>
