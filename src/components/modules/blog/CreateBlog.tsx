@@ -48,15 +48,14 @@ export default function CreateBlogForm() {
     setLoading(true);
     try {
       if (image) {
-        console.log(image.file);
-        const url = await handleImageUpload(image.file);
+        const url = await handleImageUpload(image as File);
         data.thumbnail = url;
       }
       const payload = {
         ...data,
         tags: data.tags.split(",").map((t) => t.trim()),
       };
-  
+
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
         method: "POST",
