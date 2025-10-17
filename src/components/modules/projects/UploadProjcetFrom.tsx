@@ -101,8 +101,8 @@ export default function UploadProjectForm() {
     return (
         <div className="w-full max-w-6xl mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-[2px] rounded-2xl shadow-2xl mt-10">
             <div className="bg-gray-950 rounded-2xl px-8 py-10 md:py-14">
-                <h1 className="text-4xl text-center font-extrabold mb-10 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 text-transparent bg-clip-text">
-                    🚀 Upload New Project
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-10 text-center md:text-left text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+                    Upload New Project
                 </h1>
 
                 <Form {...form}>
@@ -128,7 +128,7 @@ export default function UploadProjectForm() {
                                         <FormLabel>Project Name</FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder="Global Thought – AI-Powered Blogging"
+                                                placeholder="Your Project Name"
                                                 className="bg-gray-800 border border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40 text-white py-3"
                                                 {...field}
                                             />
@@ -257,7 +257,7 @@ export default function UploadProjectForm() {
                             <Button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:opacity-90 text-white font-semibold py-4 rounded-xl transition text-lg"
+                                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:opacity-90 text-white font-semibold py-4 sm:py-5 rounded-xl transition text-xl"
                             >
                                 {loading ? (
                                     <>

@@ -19,18 +19,26 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { IBlog } from "@/types/blog"
+import { handleImageUpload } from "@/utils" // same util as create form
 
 const formSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters"),
     content: z.string().min(10, "Content must be at least 10 characters"),
-    thumbnail: z.string().url("Must be a valid image URL"),
+    thumbnail: z.string().url("Please upload a valid image"),
     category: z.string().min(2, "Category is required"),
     tags: z.string().min(2, "Add at least one tag (comma separated)"),
 })
 
-export default function UpdateBlogForm({ initialData, onSuccess, }: { initialData: IBlog, onSuccess?: () => void }) {
+export default function UpdateBlogForm({
+    initialData,
+    onSuccess,
+}: {
+    initialData: IBlog
+    onSuccess?: () => void
+}) {
     const [loading, setLoading] = useState(false)
-    console.log(initialData);
+    const [uploading, setUploading] = useState(false)
+    const [thumbnailUrl, setThumbnailUrl] = useState(initialData?.thumbnail || "")
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -43,146 +51,181 @@ export default function UpdateBlogForm({ initialData, onSuccess, }: { initialDat
         },
     })
 
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        try {
+            setUploading(true)
+            const url = await handleImageUpload(file)
+            if (url) {
+                setThumbnailUrl(url)
+                form.setValue("thumbnail", url)
+                toast.success("Image uploaded successfully")
+            } else {
+                toast.error("Image upload failed")
+            }
+        } catch (error) {
+            console.error(error)
+            toast.error("Error uploading image")
+        } finally {
+            setUploading(false)
+        }
+    }
+
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setLoading(true)
         try {
             const payload = {
                 ...data,
                 tags: data.tags.split(",").map((t) => t.trim()),
+                thumbnail: thumbnailUrl,
             }
 
-
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project/${initialData.id}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            })
-            console.log(res);
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_API}/blog/${initialData.id}`,
+                {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                }
+            )
 
             if (!res.ok) throw new Error("Failed to update blog")
 
             toast.success("Blog updated successfully 🎉")
             onSuccess?.()
-        } catch (error: any) {
-            console.log(error);
-            toast.error("Something went wrong while updating the blog")
+        } catch (err: any) {
+            console.error(err)
+            toast.error(err.message || "Error updating blog")
         } finally {
             setLoading(false)
         }
     }
 
     return (
-        <div className="  mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-[2px] rounded-2xl shadow-2xl mt-10">
+        <div className="mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-[2px] rounded-2xl shadow-2xl mt-10">
             <div className="bg-gray-950 rounded-2xl px-10 py-8 md:py-12">
-                <h1 className="text-4xl text-center font-extrabold mb-10 bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 text-transparent bg-clip-text">
-                    📝 Update Blog Post
-                </h1>
+
 
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="text-gray-100 space-y-8 text-lg">
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="text-gray-100 space-y-8 text-lg"
+                    >
                         {/* Row 1 */}
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <FormField
-                                control={form.control}
-                                name="title"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-base font-medium text-gray-300">Title</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                className="bg-gray-800 border border-gray-700 focus:border-pink-500 focus:ring-2 focus:ring-pink-500/40 text-white placeholder:text-gray-500 text-lg py-3"
-                                                placeholder="Enter blog title"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-red-400 text-sm" />
-                                    </FormItem>
-                                )}
-                            />
+                        <div className="md:flex items-center justify-between gap-10">
+                            <div className="w-1/2">
+                                <FormField
+                                    control={form.control}
+                                    name="title"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Title</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="Enter blog title"
+                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
 
-                            <FormField
-                                control={form.control}
-                                name="category"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-base font-medium text-gray-300">Category</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                className="bg-gray-800 border border-gray-700 focus:border-pink-500 focus:ring-2 focus:ring-pink-500/40 text-white placeholder:text-gray-500 text-lg py-3"
-                                                placeholder="e.g. Frontend Development"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-red-400 text-sm" />
-                                    </FormItem>
+                                <FormField
+                                    control={form.control}
+                                    name="category"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Category</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="e.g. Frontend Development"
+                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                {/* Tags */}
+                                <FormField
+                                    control={form.control}
+                                    name="tags"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Tags</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="React, UI, Web Design"
+                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <p className="text-sm text-gray-400 mt-1">
+                                                Separate tags with commas.
+                                            </p>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                {/* Content */}
+                                <FormField
+                                    control={form.control}
+                                    name="content"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Content</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    rows={7}
+                                                    placeholder="Update your blog content..."
+                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+
+                            {/* Thumbnail upload */}
+                            <div>
+
+
+                                {thumbnailUrl && (
+                                    <img
+                                        src={thumbnailUrl}
+                                        alt="Thumbnail Preview"
+                                        className="mt-4 w-full max-w-sm rounded-lg border border-gray-700"
+                                    />
                                 )}
-                            />
+                                <div className="flex items-center gap-4 mt-5">
+                                    <FormLabel>Change Thumbnail :</FormLabel>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleFileChange}
+                                        className="text-lg text-gray-400 "
+                                    />
+                                    {uploading && (
+                                        <TbFidgetSpinner className="animate-spin text-pink-500 text-xl" />
+                                    )}
+                                </div>
+                            </div>
                         </div>
 
-                        {/* Row 2 */}
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <FormField
-                                control={form.control}
-                                name="thumbnail"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-base font-medium text-gray-300">Thumbnail URL</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                className="bg-gray-800 border border-gray-700 focus:border-pink-500 focus:ring-2 focus:ring-pink-500/40 text-white placeholder:text-gray-500 text-lg py-3"
-                                                placeholder="https://example.com/image.jpg"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-red-400 text-sm" />
-                                    </FormItem>
-                                )}
-                            />
 
-                            <FormField
-                                control={form.control}
-                                name="tags"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-base font-medium text-gray-300">Tags</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                className="bg-gray-800 border border-gray-700 focus:border-pink-500 focus:ring-2 focus:ring-pink-500/40 text-white placeholder:text-gray-500 text-lg py-3"
-                                                placeholder="React, UI, Web Design"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <p className="text-sm text-gray-400 mt-1">Separate tags with commas.</p>
-                                        <FormMessage className="text-red-400 text-sm" />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
 
-                        {/* Row 3 */}
-                        <FormField
-                            control={form.control}
-                            name="content"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className="text-base font-medium text-gray-300">Content</FormLabel>
-                                    <FormControl>
-                                        <Textarea
-                                            rows={7}
-                                            className="bg-gray-800 border border-gray-700 focus:border-pink-500 focus:ring-2 focus:ring-pink-500/40 text-white placeholder:text-gray-500 text-lg"
-                                            placeholder="Update your blog content..."
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage className="text-red-400 text-sm" />
-                                </FormItem>
-                            )}
-                        />
+
 
                         <Button
                             type="submit"
                             disabled={loading}
-                            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 hover:opacity-90 text-white font-semibold py-4 rounded-xl transition text-lg"
+                            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 text-white py-4 rounded-xl"
                         >
                             {loading ? (
                                 <>
