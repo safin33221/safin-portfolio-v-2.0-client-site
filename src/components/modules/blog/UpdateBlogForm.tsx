@@ -19,7 +19,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { IBlog } from "@/types/blog"
-import { handleImageUpload } from "@/utils" // same util as create form
+import { handleImageUpload } from "@/utils"; // same util as create form
+import { updateBlog } from "@/app/actions/blog"
 
 const formSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters"),
@@ -81,16 +82,7 @@ export default function UpdateBlogForm({
                 thumbnail: thumbnailUrl,
             }
 
-            const res = await fetch(
-                `${process.env.NEXT_PUBLIC_BASE_API}/blog/${initialData.id}`,
-                {
-                    method: "PATCH",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
-                }
-            )
-
-            if (!res.ok) throw new Error("Failed to update blog")
+            await updateBlog(payload, Number(initialData.id))
 
             toast.success("Blog updated successfully 🎉")
             onSuccess?.()

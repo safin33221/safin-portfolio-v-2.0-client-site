@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 export default async function AllBlog() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`,
-        { next: { revalidate: 60 } }
+        { next: { tags:["blog"]} }
     )
     const blogs = await res.json()
     return (
