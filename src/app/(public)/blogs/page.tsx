@@ -5,7 +5,7 @@ import { IBlog } from "@/types/blog";
 
 export default async function Blog() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
-        next: { revalidate: 60 } //use isr
+        next: { tags:['blog'] } //use isr
     })
     const blogs = await res.json()
 

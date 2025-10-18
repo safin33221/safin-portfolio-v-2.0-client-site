@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 
 export default async function BlogDetails({ params }: { params: { slug: string } }) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${params.slug}`, {
-    next: { revalidate: 60 },
+    next: { tags: ['blog'] },
   })
   const data = await res.json()
   const blog = data?.data
