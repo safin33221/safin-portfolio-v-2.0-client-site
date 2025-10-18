@@ -96,17 +96,15 @@ export default function UpdateBlogForm({
 
     return (
         <div className="mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-[2px] rounded-2xl shadow-2xl mt-10">
-            <div className="bg-gray-950 rounded-2xl px-10 py-8 md:py-12">
-
-
+            <div className="bg-gray-950 rounded-2xl px-5 sm:px-8 md:px-10 py-8 md:py-12">
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
-                        className="text-gray-100 space-y-8 text-lg"
+                        className="text-gray-100 space-y-8 text-base sm:text-lg"
                     >
-                        {/* Row 1 */}
-                        <div className="md:flex items-center justify-between gap-10">
-                            <div className="w-1/2">
+                        {/* Responsive Row */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="space-y-6">
                                 <FormField
                                     control={form.control}
                                     name="title"
@@ -116,7 +114,7 @@ export default function UpdateBlogForm({
                                             <FormControl>
                                                 <Input
                                                     placeholder="Enter blog title"
-                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500"
+                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500 w-full"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -134,7 +132,7 @@ export default function UpdateBlogForm({
                                             <FormControl>
                                                 <Input
                                                     placeholder="e.g. Frontend Development"
-                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500"
+                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500 w-full"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -142,7 +140,7 @@ export default function UpdateBlogForm({
                                         </FormItem>
                                     )}
                                 />
-                                {/* Tags */}
+
                                 <FormField
                                     control={form.control}
                                     name="tags"
@@ -152,7 +150,7 @@ export default function UpdateBlogForm({
                                             <FormControl>
                                                 <Input
                                                     placeholder="React, UI, Web Design"
-                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500"
+                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500 w-full"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -163,7 +161,7 @@ export default function UpdateBlogForm({
                                         </FormItem>
                                     )}
                                 />
-                                {/* Content */}
+
                                 <FormField
                                     control={form.control}
                                     name="content"
@@ -174,7 +172,7 @@ export default function UpdateBlogForm({
                                                 <Textarea
                                                     rows={7}
                                                     placeholder="Update your blog content..."
-                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500"
+                                                    className="bg-gray-800 border-gray-700 focus:ring-pink-500 w-full"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -185,23 +183,21 @@ export default function UpdateBlogForm({
                             </div>
 
                             {/* Thumbnail upload */}
-                            <div>
-
-
+                            <div className="flex flex-col items-center md:items-start">
                                 {thumbnailUrl && (
                                     <img
                                         src={thumbnailUrl}
                                         alt="Thumbnail Preview"
-                                        className="mt-4 w-full max-w-sm rounded-lg border border-gray-700"
+                                        className="mt-2 w-full max-w-xs sm:max-w-sm rounded-lg border border-gray-700 object-cover"
                                     />
                                 )}
-                                <div className="flex items-center gap-4 mt-5">
-                                    <FormLabel>Change Thumbnail :</FormLabel>
+                                <div className="flex flex-col sm:flex-row items-center gap-3 mt-5">
+                                    <FormLabel>Change Thumbnail:</FormLabel>
                                     <input
                                         type="file"
                                         accept="image/*"
                                         onChange={handleFileChange}
-                                        className="text-lg text-gray-400 "
+                                        className="text-sm sm:text-base text-gray-400"
                                     />
                                     {uploading && (
                                         <TbFidgetSpinner className="animate-spin text-pink-500 text-xl" />
@@ -209,10 +205,6 @@ export default function UpdateBlogForm({
                                 </div>
                             </div>
                         </div>
-
-
-
-
 
                         <Button
                             type="submit"
@@ -232,5 +224,6 @@ export default function UpdateBlogForm({
                 </Form>
             </div>
         </div>
+
     )
 }

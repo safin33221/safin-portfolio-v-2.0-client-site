@@ -32,7 +32,7 @@ export default function Sidebar() {
   ]
 
   const SidebarContent = (
-    <div className="flex    h-full flex-col bg-[#1a0029]/40 text-white">
+    <div className="flex   h-full flex-col bg-[#1a0029]/40 text-white ">
       {/* Top Brand Section */}
       <div className="p-6 text-center border-b border-purple-700">
         <h1 className="text-2xl font-bold text-purple-400">Safin&apos;s Admin</h1>
@@ -87,7 +87,7 @@ export default function Sidebar() {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex h-screen max-w-80 flex-col border-r bg-[#1a0029]/40 shadow-lg">
+      <aside className="hidden md:flex h-screen max-w-80 flex-col border-r bg-[#1a0029]/40  shadow-lg">
         {SidebarContent}
       </aside>
 
@@ -105,13 +105,14 @@ export default function Sidebar() {
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="p-0 w-72 bg-[#1a0029] border-r border-purple-800"
+            className="p-0 w-72 bg-[#1a0029] border-r border-purple-800 z-[9999]"
           >
+
             {SidebarContent}
           </SheetContent>
         </Sheet>
 
-        <h1 className="text-lg font-semibold text-purple-400">Safin&apos;s Admin</h1>
+        <h1 className="text-lg font-semibold text-purple-400"> Admin</h1>
       </div>
 
       {/* Page Spacer for Mobile Header */}
