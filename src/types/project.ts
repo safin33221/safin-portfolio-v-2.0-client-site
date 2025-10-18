@@ -2,7 +2,7 @@ export interface IProject {
     id?: string; // optional for new projects before saved
     name: string;
     description: string;
-    category: string;
+    category?: string;
     image: string; // URL
     challenges_faced: string[];
     potential_improvements: string[];

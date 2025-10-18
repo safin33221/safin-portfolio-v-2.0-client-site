@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { IProject } from "@/types/project"
 import { handleImageUpload } from "@/utils" // same util as create form
+import { updateProject } from "@/app/actions/project"
 
 const formSchema = z.object({
     name: z.string().min(3, "Project name must be at least 3 characters"),
@@ -84,25 +85,22 @@ export default function UpdateProjectForm({
                 image: imageUrl,
                 tags: data.tags.split(",").map((t) => t.trim()),
                 challenges_faced: data.challenges_faced
-                    ?.split("\n")
-                    .map((c) => c.trim())
-                    .filter(Boolean),
+                    ? data.challenges_faced
+                        .split("\n")
+                        .map((c) => c.trim())
+                        .filter(Boolean)
+                    : [], // default
                 potential_improvements: data.potential_improvements
-                    ?.split("\n")
-                    .map((p) => p.trim())
-                    .filter(Boolean),
+                    ? data.potential_improvements
+                        .split("\n")
+                        .map((p) => p.trim())
+                        .filter(Boolean)
+                    : [], // default
+                // if required
             }
 
-            const res = await fetch(
-                `${process.env.NEXT_PUBLIC_BASE_API}/project/${initialData.id}`,
-                {
-                    method: "PATCH",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
-                }
-            )
 
-            if (!res.ok) throw new Error("Failed to update project")
+            await updateProject(payload as IProject, Number(initialData.id))
 
             toast.success("Project updated successfully 🎉")
             onSuccess?.()

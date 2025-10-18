@@ -3,7 +3,7 @@ import { IProject } from "@/types/project";
 
 export default async function DashboardProjects() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
-        next: { revalidate: 60 }
+        next: { tags: ["project"] }
     });
     const data = await res.json();
     const projects = data?.data || [];

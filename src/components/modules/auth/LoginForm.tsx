@@ -51,7 +51,7 @@ export default function LoginForm() {
                 callbackUrl: "/dashboard"
             })
 
-            if (!res.ok) {
+            if (res && !res.ok) {
                 toast.error("Invalid Credential")
             } else if (res?.ok) {
                 toast.success("Login successful");
