@@ -47,9 +47,16 @@ export default function LoginForm() {
         try {
             const res = await signIn("credentials", {
                 ...data,
+                redirect: false,
                 callbackUrl: "/dashboard"
             })
-            console.log(res);
+
+            if (!res.ok) {
+                toast.error("Invalid Credential")
+            } else if (res?.ok) {
+                toast.success("Login successful");
+                window.location.href = res.url || "/dashboard";
+            }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.log(error);
@@ -59,7 +66,7 @@ export default function LoginForm() {
         }
     };
     return (
-        <div className="   shadow-lg  ">
+        <div className="shadow-lg  ">
             <h1 className="text-3xl text-center font-bold bg-gradient-to-r from-purple-300 to-purple-600 text-transparent bg-clip-text">
                 Admin Login
             </h1>

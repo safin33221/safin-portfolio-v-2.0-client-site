@@ -48,7 +48,7 @@ export default async function Page() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {cards.map((card, index) => (
-          <div>
+          <div key={index}>
             <Card className="relative overflow-hidden border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-all duration-300 group max-w-xl w-full  p-20">
               <div
                 className={`absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-br ${card.gradient} transition-all duration-300`}

@@ -34,17 +34,18 @@ import { LoginDialog } from "../modules/auth/LoginDialog"
 // Core navigation
 const navigationLinks = [
   { href: "/", label: "Home" },
+  { href: "/#about", label: "About Me" },
   { href: "/#projects", label: "Projects" },
   { href: "/blogs", label: "Blogs" },
-  {
-    label: "About",
-    submenu: true,
-    items: [
-      { href: "/about", label: "About Me", icon: "InfoIcon" },
-      { href: "/tutorials", label: "Tutorials", icon: "BookOpenIcon" },
-      { href: "/support", label: "Support", icon: "LifeBuoyIcon" },
-    ],
-  },
+  // {
+  //   label: "About",
+  //   submenu: true,
+  //   items: [
+  //     { href: "/about", label: "About Me", icon: "InfoIcon" },
+  //     { href: "/tutorials", label: "Tutorials", icon: "BookOpenIcon" },
+  //     { href: "/support", label: "Support", icon: "LifeBuoyIcon" },
+  //   ],
+  // },
 ]
 
 // Demo auth state
@@ -66,41 +67,16 @@ export default function Navbar() {
             <NavigationMenuList className="gap-4">
               {navigationLinks.map((link, index) => (
                 <NavigationMenuItem key={index}>
-                  {link.submenu ? (
-                    <>
-                      <NavigationMenuTrigger className="text-xl hover:bg-primary/30  hover:text-primary-foreground bg-transparent px-2 py-1.5 font-medium ">
-                        {link.label}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1">
-                        <ul className={cn("min-w-48 ")}>
-                          {link.items.map((item, idx) => (
-                            <li key={idx}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={item.href}
-                                  className="py-1.5 flex items-center gap-2 hover:bg-primary/20 rounded-md px-2"
-                                >
-                                  {item.icon === "InfoIcon" && <InfoIcon size={16} />}
-                                  {item.icon === "BookOpenIcon" && <BookOpenIcon size={16} />}
-                                  {item.icon === "LifeBuoyIcon" && <LifeBuoyIcon size={16} />}
-                                  {item.label}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
+                  {
                     <NavigationMenuLink asChild>
                       <Link
                         href={link.href as string}
-                        className="text-xl hover:border hover:bg-primary/20 hover:text-primary-foreground py-1.5 font-medium px-2  rounded-md"
+                        className="text-xl  hover:bg-primary/50 hover:text-primary-foreground py-1.5 font-medium px-2  rounded-md"
                       >
                         {link.label}
                       </Link>
                     </NavigationMenuLink>
-                  )}
+                  }
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
