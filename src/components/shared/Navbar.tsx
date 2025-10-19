@@ -122,7 +122,7 @@ export default function Navbar() {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <span
-                    onClick={() => signOut()}
+                    onClick={() => signOut({ redirect: false })}
                     className="flex items-center gap-2 text-red-600"
                   >
                     <LogOutIcon size={16} /> Logout
