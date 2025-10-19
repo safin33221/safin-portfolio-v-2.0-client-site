@@ -7,6 +7,7 @@ export default async function DashboardProjects() {
     });
     const data = await res.json();
     const projects = data?.data || [];
+    // console.log(projects);
 
     return (
         <div className="px-4 md:px-12 lg:px-20 py-16 min-h-screen text-white ">

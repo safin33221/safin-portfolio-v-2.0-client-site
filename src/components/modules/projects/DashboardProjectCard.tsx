@@ -16,21 +16,42 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { updateProject } from "@/app/actions/project";
 
 export default function DashboardProjectCard({ project }: { project: IProject }) {
   const [deleting, setDeleting] = useState(false);
 
   const handleDelete = async () => {
     try {
+      setDeleting(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project/${project.id}`, {
         method: "DELETE",
       });
       if (!res.ok) return toast.error("Failed to delete project");
+      setDeleting(false)
       toast.success("Project deleted successfully");
     } catch {
+      setDeleting(false)
       toast.error("Failed to delete project");
+    } finally {
+      setDeleting(false)
+
     }
   };
+
+  const changeDisplay = async () => {
+    try {
+      await updateProject(
+        { display: !project.display },
+        Number(project.id)
+      )
+      toast.success(" update project display ")
+    } catch (err: any) {
+      toast.error("Failed to update project display:", err)
+    }
+  }
+
 
   return (
     <div className="w-full ">
@@ -130,6 +151,12 @@ export default function DashboardProjectCard({ project }: { project: IProject })
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
+
+              <Button onClick={changeDisplay}>
+                {
+                  project.display ? "Public" : "Privet"
+                }
+              </Button>
             </div>
           </div>
         </div>

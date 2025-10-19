@@ -11,4 +11,5 @@ export interface IProject {
     source_code_link: string;
     createdAt?: string;
     updatedAt?: string;
+    display?:boolean;
 }

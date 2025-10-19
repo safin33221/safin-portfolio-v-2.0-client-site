@@ -3,7 +3,7 @@
 import { revalidateTag } from "next/cache"
 import { IProject } from "@/types/project"
 
-export const updateProject = async (data: IProject, id: number) => {
+export const updateProject = async (data: Partial<IProject>, id: number) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
