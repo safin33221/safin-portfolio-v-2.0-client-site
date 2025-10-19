@@ -64,8 +64,8 @@ const MyTechSkill = () => {
         <section id="skills" className="w-full py-10 max-md:bg-gradient-to-b from-black via-gray-900 to-black text-white">
             <div className="max-w-7xl mx-auto px-3">
                 {/* Section Title */}
-                <h2 className="text-5xl font-extrabold text-center mb-16">
-                    💡
+                <h2 className="text-4xl font-extrabold text-center mb-5">
+                    
                     <span className="bg-gradient-to-r from-purple-300 to-purple-600 text-transparent bg-clip-text">
                         My Expertise
                     </span>

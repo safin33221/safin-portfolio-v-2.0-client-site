@@ -54,7 +54,7 @@ export default function Navbar() {
   const session = useSession()
   console.log(session);
   return (
-    <header className="border-b px-4 md:px-6 py-1 sticky top-0 bg backdrop-blur z-50">
+    <header className="border-b px-4 md:px-6 py-3 sticky top-0 bg backdrop-blur z-50">
       <div className="flex h-16 items-center justify-between gap-2">
         {/* Left */}
         <div className="flex items-center gap-6">
