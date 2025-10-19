@@ -18,6 +18,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { deleteBlog } from "@/app/actions/blog"
 
 const DashboardBlogCard = (blog: IBlog) => {
 
@@ -26,9 +27,7 @@ const DashboardBlogCard = (blog: IBlog) => {
   const handleDelete = async () => {
     setDeleting(true)
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${blog.id}`, {
-        method: "DELETE",
-      })
+      const res = await deleteBlog(Number(blog.id))
       if (!res.ok) return toast.error("Failed to delete blog")
       toast.success("Blog deleted successfully")
     } catch {
@@ -39,7 +38,7 @@ const DashboardBlogCard = (blog: IBlog) => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-zinc-900 to-gray-950 rounded-2xl overflow-hidden shadow-lg hover:shadow-purple-700/20 transition-all border border-zinc-800 flex flex-col">
+    <div className="bg-gradient-to-br from-gray-900 via-zinc-900 to-gray-950 rounded-2xl overflow-hidden shadow-lg hover:shadow-purple-700/20 transition-all border border-zinc-800 flex flex-col ">
       {blog.thumbnail && (
         <div className="relative w-full h-48 overflow-hidden">
           <Image
@@ -110,7 +109,7 @@ const DashboardBlogCard = (blog: IBlog) => {
           </AlertDialog>
         </div>
 
-       
+
       </div>
     </div>
   )

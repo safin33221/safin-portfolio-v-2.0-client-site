@@ -4,10 +4,10 @@ import Image from "next/image"
 
 const BlogCard = (blog: IBlog) => {
   return (
-    <div className="bg-gradient-to-b from-zinc-950 to-zinc-900 text-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row md:items-stretch gap-6 p-5">
+    <div className="bg-gradient-to-b from-zinc-950 to-zinc-900 text-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row md:items-stretch gap-6 p-5 max-h-80">
       {/* Thumbnail */}
       {blog.thumbnail && (
-        <div className="relative w-full md:w-1/3 h-56 md:h-auto rounded-xl overflow-hidden border border-zinc-800">
+        <div className="relative w-full md:w-1/3  md:h-auto rounded-xl overflow-hidden border border-zinc-800">
           <Image
             src={blog.thumbnail}
             alt={blog.title}

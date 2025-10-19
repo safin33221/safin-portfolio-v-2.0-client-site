@@ -17,3 +17,15 @@ export const updateBlog = async (data: IBlog, id: number) => {
     await revalidateTag("project")
     return res.json()
 }
+
+
+export const deleteBlog = async (id: number) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${id}`, {
+        method: "DELETE",
+    })
+
+    if (!res.ok) throw new Error("Failed to Delete blog")
+    await revalidateTag("blog")
+    return res.json()
+}
+
