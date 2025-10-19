@@ -18,7 +18,7 @@ export function UpdateBlogDialog(blog: IBlog) {
         <AlertDialog open={open} onOpenChange={setOpen}>
             <AlertDialogTrigger asChild>
                 <Button variant="outline" className="flex items-center gap-2">
-                    <Pencil size={16} /> Edit
+                    <Pencil size={16} />View and Edit
                 </Button>
             </AlertDialogTrigger>
 

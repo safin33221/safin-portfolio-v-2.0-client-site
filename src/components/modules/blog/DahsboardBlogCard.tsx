@@ -110,12 +110,7 @@ const DashboardBlogCard = (blog: IBlog) => {
           </AlertDialog>
         </div>
 
-        <Link
-          href={`/blogs/${blog.id}`}
-          className="mt-5 inline-block text-center text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-90 py-2 rounded-lg transition"
-        >
-          Read Full Blog
-        </Link>
+       
       </div>
     </div>
   )
