@@ -2,16 +2,12 @@
 
 import Image from "next/image";
 import { IProject } from "@/types/project";
+import { getProject } from "@/app/actions/project";
 
 const MyProjects = async () => {
 
-
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
-        next: { tags: ['project'] }
-    });
-    const data = await res.json();
-    const projects = data?.data || [];
+    const res = await getProject();
+    const projects = res?.data || [];
 
     return (
         <section id="projects" className="w-full  px-3 md:px-16 lg:px-24 ">

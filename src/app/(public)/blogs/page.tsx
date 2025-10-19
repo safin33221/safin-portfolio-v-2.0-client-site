@@ -1,13 +1,14 @@
 "use server"
 
+import { getBlog } from "@/app/actions/blog";
 import BlogCard from "@/components/modules/blog/blogCard";
 import { IBlog } from "@/types/blog";
 
 export default async function Blog() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
-        next: { tags:['blog'] } //use isr
-    })
-    const blogs = await res.json()
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
+    //     next: { tags:['blog'] } //use isr
+    // })
+    const blogs = await getBlog()
 
     return (
         <div>
