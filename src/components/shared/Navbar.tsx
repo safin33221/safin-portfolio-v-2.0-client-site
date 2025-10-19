@@ -1,23 +1,17 @@
 "use client"
 
 import {
-  BookOpenIcon,
-  InfoIcon,
-  LifeBuoyIcon, LogOutIcon,
+  LogOutIcon,
   UserIcon,
   PlusCircleIcon,
   FolderOpenIcon
 } from "lucide-react"
 import Logo from "@/components/logo"
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
+  NavigationMenu, NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
+  NavigationMenuList
 } from "@/components/ui/navigation-menu"
 import {
   DropdownMenu,
@@ -57,14 +51,14 @@ export default function Navbar() {
     <header className="border-b px-4 md:px-6 py-3 sticky top-0 bg backdrop-blur z-50">
       <div className="flex h-16 items-center justify-between gap-2">
         {/* Left */}
+        <Link href="/" className="text-primary flex  items-center gap-4 hover:text-primary/90">
+          <Logo />
+          <span className="text-2xl font-bold">SaFin</span>
+        </Link>
         <div className="flex items-center gap-6">
-          <Link href="/" className="text-primary flex  items-center gap-4 hover:text-primary/90">
-            <Logo />
-            <span className="text-2xl font-bold">SaFin</span>
-          </Link>
 
           {/* Navigation Menu */}
-          <NavigationMenu className="max-md:hidden">
+          <NavigationMenu className="max-md:hidden  ">
             <NavigationMenuList className="gap-4">
               {navigationLinks.map((link, index) => (
                 <NavigationMenuItem key={index}>
