@@ -5,9 +5,9 @@ export default function Logo() {
     <Image
       src={logo}
       alt="safin"
-      height={50}
-      width={50}
-      className="rounded-full p-2"
+      height={60}
+      width={60}
+      className="rounded-full p-[1px] border"
     />
   )
 }

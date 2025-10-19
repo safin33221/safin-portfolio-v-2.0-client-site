@@ -326,6 +326,10 @@
 
 
 
-html {
+
+
+html, body {
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
+
