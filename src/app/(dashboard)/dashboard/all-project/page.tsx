@@ -1,13 +1,12 @@
+import { getProject } from "@/app/actions/project";
 import DashboardProjectCard from "@/components/modules/projects/DashboardProjectCard";
 import { IProject } from "@/types/project";
 
 export default async function DashboardProjects() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
-        next: { tags: ["project"] }
-    });
-    const data = await res.json();
+
+    const data = await getProject()
     const projects = data?.data || [];
-    // console.log(projects);
+
 
     return (
         <div className="px-4 md:px-12 lg:px-20 py-16 min-h-screen text-white ">

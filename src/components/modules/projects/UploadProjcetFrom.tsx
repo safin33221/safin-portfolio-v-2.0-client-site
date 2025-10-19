@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import ImageUploader from "@/components/ImageUploader";
 import { handleImageUpload } from "@/utils";
 import { useRouter } from "next/navigation";
+import { CreateProject } from "@/app/actions/project";
 
 const formSchema = z.object({
     name: z.string().min(3, "Project name must be at least 3 characters"),
@@ -75,15 +76,9 @@ export default function UploadProjectForm() {
             };
 
 
-            console.log("Final Payload:", payload);
+            const res = await CreateProject(payload)
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
-
-            if (!res.ok) throw new Error("Failed to upload project");
+            if (!res.success) throw new Error("Failed to upload project");
 
             toast.success("✅ Project uploaded successfully!");
             form.reset();

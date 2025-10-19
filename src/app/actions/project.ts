@@ -13,12 +13,36 @@ export const getProject = async () => {
 
     return res.json()
 }
+
+
+export const CreateProject = async (data: IProject) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    });
+
+    if (!res.ok) throw new Error("Failed to update project")
+    return res.json()
+}
 export const updateProject = async (data: Partial<IProject>, id: number) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     })
+
+    if (!res.ok) throw new Error("Failed to update project")
+
+    await revalidateTag("project")
+    return res.json()
+}
+
+
+export const deleteProject = async (id: number) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project/${id}`, {
+        method: "DELETE",
+    });
 
     if (!res.ok) throw new Error("Failed to update project")
 

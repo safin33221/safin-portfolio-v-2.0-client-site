@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import ImageUploader from "@/components/ImageUploader";
 import { handleImageUpload } from "@/utils";
 import { useRouter } from "next/navigation";
+import { createBlog } from "@/app/actions/blog";
 
 
 const formSchema = z.object({
@@ -59,14 +60,10 @@ export default function CreateBlogForm() {
         ...data,
         tags: data.tags.split(",").map((t) => t.trim()),
       };
+      const res = await createBlog(payload)
+   
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error("Failed to create blog");
+      if (!res.success) throw new Error("Failed to create blog");
       toast.success("✅ Blog created successfully!");
       form.reset();
       router.push("/dashboard/all-blog")

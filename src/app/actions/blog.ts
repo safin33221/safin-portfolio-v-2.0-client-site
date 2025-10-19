@@ -10,6 +10,17 @@ export const getBlog = async () => {
     if (!res.ok) throw new Error("Failed to update blog")
     return res.json()
 }
+export const createBlog = async (data: IBlog,) => {
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    });
+
+    if (!res.ok) throw new Error("Failed to update blog")
+    return res.json()
+}
 export const updateBlog = async (data: IBlog, id: number) => {
 
     const res = await fetch(
