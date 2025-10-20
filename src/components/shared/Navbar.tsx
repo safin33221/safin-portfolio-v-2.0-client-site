@@ -80,6 +80,15 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-2 border-2 border-purple-400 md:hidden"
+          >
+            <Link href={`/blogs`}>
+              Blogs
+            </Link>
+          </Button>
           {session?.status !== "authenticated" ? (
             <>
 
@@ -92,12 +101,11 @@ export default function Navbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   size="sm"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 border-2 border-purple-400"
                 >
-                  <UserIcon size={16} />
-                  <span>{session?.data?.user?.email}</span>
+                  Dashboard
                 </Button>
               </DropdownMenuTrigger>
 
@@ -110,12 +118,12 @@ export default function Navbar() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/projects/new" className="flex items-center gap-2">
+                  <Link href="/dashboard/create-blog" className="flex items-center gap-2">
                     <PlusCircleIcon size={16} /> New Project
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/blogs/new" className="flex items-center gap-2">
+                  <Link href="/dashboard/create-blog" className="flex items-center gap-2">
                     <PlusCircleIcon size={16} /> New Blog
                   </Link>
                 </DropdownMenuItem>
