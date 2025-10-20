@@ -23,7 +23,7 @@ import figma from '../../../../public/asset/tech/figma.png'
 import { Code2, Server, Wrench } from "lucide-react"
 
 const MyTechSkill = () => {
-    // Categorized skills
+
     const frontend = [
         { name: "HTML", icon: html },
         { name: "CSS", icon: css },

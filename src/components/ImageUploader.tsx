@@ -4,6 +4,7 @@ import { AlertCircleIcon, ImageUpIcon, XIcon } from "lucide-react"
 
 import { useFileUpload } from "@/hooks/use-file-upload"
 import { useEffect } from "react"
+import Image from "next/image"
 
 export default function ImageUploader({ onChange }: { onChange?: (fileUrl: File | null) => void }) {
   const maxSizeMB = 10
@@ -55,11 +56,15 @@ export default function ImageUploader({ onChange }: { onChange?: (fileUrl: File 
           />
           {previewUrl ? (
             <div className="absolute inset-0">
-              <img
+    
+              <Image
                 src={previewUrl}
+                width={300}
+                height={300}
                 alt={files[0]?.file?.name || "Uploaded image"}
                 className="size-full object-cover"
               />
+
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center px-4 py-3 text-center">

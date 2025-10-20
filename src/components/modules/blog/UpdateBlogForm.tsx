@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button"
 import { IBlog } from "@/types/blog"
 import { handleImageUpload } from "@/utils"; // same util as create form
 import { updateBlog } from "@/app/actions/blog"
+import Image from "next/image"
 
 const formSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters"),
@@ -185,8 +186,10 @@ export default function UpdateBlogForm({
                             {/* Thumbnail upload */}
                             <div className="flex flex-col items-center md:items-start">
                                 {thumbnailUrl && (
-                                    <img
+                                    <Image
                                         src={thumbnailUrl}
+                                        height={300}
+                                        width={300}
                                         alt="Thumbnail Preview"
                                         className="mt-2 w-full max-w-xs sm:max-w-sm rounded-lg border border-gray-700 object-cover"
                                     />

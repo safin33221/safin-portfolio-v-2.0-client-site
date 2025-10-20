@@ -8,9 +8,7 @@ import {
   LogOut,
   LayoutDashboard,
   List,
-  Menu,
-  Upload,
-  UploadIcon,
+  Menu, UploadIcon
 } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { signOut, useSession } from "next-auth/react"

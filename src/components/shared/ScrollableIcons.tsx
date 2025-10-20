@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { Home, User, Briefcase, Layers, Phone } from "lucide-react"
-import Link from "next/link"
 
 const icons = [
   { id: "home", icon: <Home className="size-3" />, label: "Home" },

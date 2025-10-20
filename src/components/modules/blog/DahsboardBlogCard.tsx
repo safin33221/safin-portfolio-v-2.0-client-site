@@ -1,7 +1,6 @@
 "use client"
 
 import { IBlog } from "@/types/blog"
-import Link from "next/link"
 import Image from "next/image"
 import { toast } from "sonner"
 import { Trash2 } from "lucide-react"

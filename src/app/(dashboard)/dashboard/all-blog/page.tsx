@@ -1,10 +1,7 @@
 import DashboardBlogCard from "@/components/modules/blog/DahsboardBlogCard";
-import { Button } from "@/components/ui/button";
 import { IBlog } from "@/types/blog";
 import { PenTool } from "lucide-react";
-import next from "next";
 import Link from "next/link";
-import { toast } from "sonner";
 
 export default async function AllBlog() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`,

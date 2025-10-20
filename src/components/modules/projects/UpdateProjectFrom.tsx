@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client"
 
 import { useState } from "react"
@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button"
 import { IProject } from "@/types/project"
 import { handleImageUpload } from "@/utils"
 import { updateProject } from "@/app/actions/project"
+import Image from "next/image"
 
 const formSchema = z.object({
   name: z.string().min(3, "Project name must be at least 3 characters"),
@@ -94,8 +95,12 @@ export default function UpdateProjectForm({
       await updateProject(payload as IProject, Number(initialData.id))
       toast.success("Project updated successfully 🎉")
       onSuccess?.()
-    } catch (err: any) {
-      toast.error(err.message || "Error updating project")
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message || "Error updating project")
+      } else {
+        toast.error("Error updating project")
+      }
     } finally {
       setLoading(false)
     }
@@ -247,8 +252,10 @@ export default function UpdateProjectForm({
               {/* Right section */}
               <div className="flex flex-col items-center md:items-start space-y-5">
                 {imageUrl && (
-                  <img
+                  <Image
                     src={imageUrl}
+                    width={500}
+                    height={500}
                     alt="Project Preview"
                     className="w-full max-w-xs sm:max-w-sm rounded-lg border border-gray-700 object-cover"
                   />

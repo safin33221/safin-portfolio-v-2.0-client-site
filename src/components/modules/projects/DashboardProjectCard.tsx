@@ -45,8 +45,9 @@ export default function DashboardProjectCard({ project }: { project: IProject })
         Number(project.id)
       )
       toast.success(" update project display ")
-    } catch (err: any) {
-      toast.error("Failed to update project display:", err)
+    } catch (err) {
+      toast.error("Failed to update project display")
+      console.log(err);
     }
   }
 
