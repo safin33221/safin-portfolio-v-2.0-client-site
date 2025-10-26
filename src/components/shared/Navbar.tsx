@@ -1,9 +1,7 @@
 "use client"
 
 import {
-  LogOutIcon,
-  UserIcon,
-  PlusCircleIcon,
+  LogOutIcon, PlusCircleIcon,
   FolderOpenIcon
 } from "lucide-react"
 import Logo from "@/components/logo"

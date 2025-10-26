@@ -15,7 +15,7 @@ export const getBlogById = async (slug: number) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${slug}`, {
         next: { tags: ['blog'] },
     })
-    if (!res.ok) throw new Error("Failed to update blog")
+    if (!res.ok) throw new Error("success to get blog")
     return res.json()
 }
 export const createBlog = async (data: IBlog,) => {

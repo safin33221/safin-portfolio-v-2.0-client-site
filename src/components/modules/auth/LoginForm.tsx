@@ -4,7 +4,7 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import {
   Form,
   FormControl,
-   FormField,
+  FormField,
   FormItem,
   FormLabel,
   FormMessage
@@ -14,8 +14,9 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email("Enter a valid email"),
@@ -24,6 +25,15 @@ const formSchema = z.object({
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
+  const { data: session } = useSession();
+
+
+  useEffect(() => {
+    if (session) {
+      router.replace("/dashboard");
+    }
+  }, [session, router]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,15 +48,15 @@ export default function LoginForm() {
     try {
       const res = await signIn("credentials", {
         ...data,
-        redirect: false,
+        redirect: false, 
         callbackUrl: "/dashboard",
       });
 
-      if (res && !res.ok) {
+      if (res?.error) {
         toast.error("❌ Invalid credentials");
       } else if (res?.ok) {
         toast.success("✅ Login successful");
-        window.location.href = res.url || "/dashboard";
+        router.push(res.url || "/dashboard"); 
       }
     } catch {
       toast.error("⚠️ Something went wrong");
