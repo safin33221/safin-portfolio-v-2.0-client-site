@@ -28,6 +28,7 @@ const navigationLinks = [
   { href: "/", label: "Home" },
   { href: "/#about", label: "About Me" },
   { href: "/#projects", label: "Projects" },
+  { href: "/#contact", label: "contact" },
   { href: "/blogs", label: "Blogs" },
   // {
   //   label: "About",

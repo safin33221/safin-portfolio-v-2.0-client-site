@@ -1,7 +1,20 @@
+"use client"
+import { LoginDialog } from "@/components/modules/auth/LoginDialog";
+import LoginForm from "@/components/modules/auth/LoginForm";
 import Sidebar from "@/components/shared/Sidebar";
+
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 import React from "react";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+  const session = useSession()
+  const router = useRouter()
+  console.log(session);
+  if (!session.data) {
+    return router.push("/")
+  }
   return (
     <div className="max-w-[1920px] flex mx-auto min-h-screen">
       {/* Sidebar */}

@@ -1,19 +1,28 @@
+
 import { getBlogById } from "@/app/actions/blog"
 import { IBlog } from "@/types/blog"
 import Image from "next/image"
 import Link from "next/link"
 
-export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`)
-  const { data: blogs } = await res.json()
-  return blogs.map((blog: IBlog) => ({
-    slug: String(blog.id),
-  }))
-}
+// export async function generateStaticParams() {
+//   try {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
+//       cache: "no-store",
+//     })
+//     if (!res.ok) return []
+//     const { data: blogs } = await res.json()
+//     return blogs?.map((blog: IBlog) => ({
+//       slug: String(blog.id),
+//     })) || []
+//   } catch (e) {
+//     console.error("Error generating static params:", e)
+//     return []
+//   }
+// }
+
 
 export default async function BlogDetails({ params }: { params: { slug: string } }) {
   const res = await getBlogById(Number(params.slug))
-
   const blog = res?.data
 
   return (

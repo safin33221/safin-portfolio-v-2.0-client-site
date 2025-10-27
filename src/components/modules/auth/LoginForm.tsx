@@ -39,7 +39,7 @@ export default function LoginForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "admin@safinportfolio.com",
-      password: "yourStrongPassword",
+      password: "",
     },
   });
 
@@ -73,7 +73,7 @@ export default function LoginForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
+          {/* <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
@@ -90,7 +90,7 @@ export default function LoginForm() {
                 <FormMessage className="text-red-400 text-sm" />
               </FormItem>
             )}
-          />
+          /> */}
 
           <FormField
             control={form.control}

@@ -2,14 +2,14 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import myImg from "../../../../public/asset/safin.png"
+import myImg from "../../../../public/asset/bg-safin.png"
 import SocialLink from "@/components/shared/SocialLink"
 
 const Hero = () => {
   return (
     <section
       id="home"
-      className="w-full  min-h-screen flex flex-col justify-center px-3 md:px-16 lg:px-24 py-16"
+      className="w-full  md:min-h-screen flex flex-col justify-center px-3 md:px-16 lg:px-24 py-16"
     >
       <div className="flex flex-col-reverse md:flex-row items-center gap-14 lg:gap-20">
         {/* Left Side Content */}
@@ -60,11 +60,11 @@ const Hero = () => {
         >
           <Image
             src={myImg}
-            width={420}
-            height={420}
+            width={370}
+            height={220}
             priority
             alt="Safin"
-            className="rounded-full border-4 border-[#915eff] shadow-lg hover:scale-105 transition-transform duration-300"
+            className="  shadow-lg hover:scale-105 transition-transform duration-300"
           />
         </motion.div>
       </div>
