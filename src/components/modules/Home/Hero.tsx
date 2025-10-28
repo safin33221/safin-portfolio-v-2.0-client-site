@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="w-full  md:min-h-screen flex flex-col justify-center px-3 md:px-16 lg:px-24 py-16"
+      className="w-full  md:min-h-screen flex flex-col justify-center px-3 md:px-16 lg:px-24 md:py-16"
     >
       <div className="flex flex-col-reverse md:flex-row items-center gap-14 lg:gap-20">
         {/* Left Side Content */}
