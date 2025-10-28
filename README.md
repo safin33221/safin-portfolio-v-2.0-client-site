@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+ Portfolio (Next.js + Prisma + Express.js)
 
-## Getting Started
+**Live Site:** [https://safayet-hossan.vercel.app](https://safayet-hossan.vercel.app)  
+**Backend API:** https://safin-portfolio-20-client-side.vercel.app
 
-First, run the development server:
+**Admin Login:**  
+- **No Need Email**
+- **Password:** `YourStrongPassword`
 
+---
+
+## 📖 Project Overview
+A modern personal portfolio website built with **Next.js 15 (TypeScript)** and **Express.js**.  
+It includes **authentication**, a secure **dashboard**, and dynamic management for **blogs and projects**.  
+Uses **Prisma ORM** for database access and **JWT** for secure authentication.
+
+---
+
+## 🧱 Tech Stack
+| Layer | Technology |
+|-------|-------------|
+| Frontend | Next.js 15 (TypeScript), Tailwind CSS 4, Framer Motion, Radix UI, Styled Components |
+| Backend | Node.js, Express.js |
+| ORM | Prisma |
+| Database | PostgreSQL *(or MongoDB alternative)* |
+| Authentication | JWT + bcrypt + NextAuth |
+| Notifications | react-hot-toast / sonner |
+| Deployment | Vercel  |
+
+---
+
+## 📦 Dependencies
+
+### Main
+| Package | Purpose |
+|----------|----------|
+| **@emailjs/browser**, **emailjs** | Contact form and email sending |
+| **@hookform/resolvers**, **react-hook-form**, **zod** | Form validation and schema enforcement |
+| **@radix-ui/react-\*** | Accessible, headless UI primitives (dialogs, dropdowns, switches) |
+| **class-variance-authority**, **clsx**, **tailwind-merge** | Conditional and composable Tailwind CSS classes |
+| **framer-motion** | Animations and transitions |
+| **lucide-react**, **react-icons** | Icon components |
+| **next-auth** | Authentication for Next.js routes |
+| **next-themes** | Theme toggling (light/dark mode) |
+| **react-quill**, **quill** | Rich text editor for blog/project content |
+| **styled-components** | Component-level styling |
+| **sweetalert2** | Alert and confirmation dialogs |
+| **sonner** | Toast notifications |
+
+### Dev
+| Package | Purpose |
+|----------|----------|
+| **@tailwindcss/postcss**, **tailwindcss** | Tailwind CSS integration |
+| **typescript**, **@types/react**, **@types/node** | TypeScript typing support |
+| **eslint**, **eslint-config-next** | Linting and Next.js best practices |
+| **tw-animate-css** | Animation utilities for Tailwind |
+
+---
+
+## 🚀 Features
+
+### Public
+- About Me section (SSG)
+- Project showcase with ISR
+- Blog listing and single-blog pages (ISR with revalidate)
+- Responsive, accessible design
+- Contact form with EmailJS integration
+
+### Private (Admin)
+- JWT-secured login  
+- Dashboard for blog and project CRUD operations  
+- Form validation with Zod + React Hook Form  
+- Real-time feedback via `sonner` / `sweetalert2`  
+- Integrated React Quill rich text editor
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone repositories
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone https://github.com/safin33221/safin-portfolio-v-2.0-client-site
+git clone https://github.com/safin33221/safin-portfolio-v-2.0-server-site
