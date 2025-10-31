@@ -75,7 +75,7 @@ export default function CreateBlogForm() {
   };
 
   return (
-    <div className="w-full px-4 sm:px-8 md:px-16 py-10">
+    <div className="w-full px-1 sm:px-4 md:px-16 py-10">
       <div className="rounded-2xl px-6 py-8 md:py-14 bg-gray-900/60">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-10 text-center md:text-left text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
           Create New Blog

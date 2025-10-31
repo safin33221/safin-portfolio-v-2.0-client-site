@@ -81,15 +81,15 @@ export default function UploadProjectForm() {
   };
 
   return (
-    <section className="max-w-6xl mx-auto bg-gray-950 border border-gray-800 rounded-2xl shadow-lg p-8 sm:p-10 mt-10">
+    <section className=" mx-auto bg-gray-950 border border-gray-800 rounded-2xl shadow-lg   mt-10">
       <h1 className="text-3xl sm:text-4xl font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-        Upload New Project
+        Upload New Project 
       </h1>
 
       {/* Grid layout (12 cols, responsive order) */}
-      <div className="grid grid-cols-12 gap-8">
+      <div className="grid grid-cols-12 gap-8 mx-auto p-5">
         {/* Image uploader first on mobile, right side on desktop */}
-        <div className="col-span-12 md:col-span-4 md:order-2 order-1 flex flex-col items-center justify-start bg-gray-900 border border-gray-700 rounded-xl p-5">
+        <div className="col-span-11 md:col-span-4 md:order-2 order-1 flex flex-col items-center justify-start bg-gray-900 border border-gray-700 rounded-xl p-5">
           <h2 className="text-purple-400 mb-3 font-semibold text-lg">
             Project Thumbnail
           </h2>
@@ -97,7 +97,7 @@ export default function UploadProjectForm() {
         </div>
 
         {/* Form fields second on mobile, left side on desktop */}
-        <div className="col-span-12 md:col-span-8 md:order-1 order-2">
+        <div className="col-span-11 md:col-span-8 md:order-1 order-2">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}

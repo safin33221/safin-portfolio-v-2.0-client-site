@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import AuthProvider from "@/provider/AuthProvider";
 import { Toaster } from "sonner";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 const suse = SUSE({
@@ -35,6 +36,7 @@ export default function RootLayout({
           <AuthProvider>
 
             {children}
+            <SpeedInsights />
           </AuthProvider>
         </ThemeProvider>
       </body>
