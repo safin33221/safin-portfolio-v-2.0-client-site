@@ -7,9 +7,7 @@ import Link from "next/link";
 
 
 export default async function Blog() {
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
-    //     next: { tags:['blog'] } //use isr
-    // })
+   
     const blogs = await getBlog()
 
     return (

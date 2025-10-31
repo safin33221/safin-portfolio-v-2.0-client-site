@@ -7,9 +7,8 @@ const BASE_API = process.env.NEXT_PUBLIC_BASE_API
 
 // Fetch all blogs
 export const getBlog = async () => {
-  const res = await fetch(`${BASE_API}/blog`, {
-    next: { tags: ["blog"] },
-  })
+  const res = await fetch(`${BASE_API}/blog`)
+  await revalidateTag("blog")
   if (!res.ok) throw new Error("Failed to fetch blogs")
   return await res.json()
 }
